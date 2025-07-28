@@ -59,6 +59,9 @@ jobs:
             working-dir: modules/vnet
             output-file: README.md
             output-method: replace
+        
+        - name: Fix file permissions
+          run: sudo chown -R $USER:$USER .
 
         - name: Commit & Push updated docs
           if: github.ref == 'refs/heads/main'
