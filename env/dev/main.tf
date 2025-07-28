@@ -1,11 +1,11 @@
-# terraform {
-#   backend "azurerm" {
-#     resource_group_name   = "rg-dev-eastus"
-#     storage_account_name  = "tfstatestorage"
-#     container_name        = "tfstate"
-#     key                   = "dev.terraform.tfstate"
-#   }
-#   }
+terraform {
+  backend "azurerm" {
+    resource_group_name   = "rg-tfstate"
+    storage_account_name  = "tfstateremotetesting"
+    container_name        = "tfstate"
+    key                   = "dev.terraform.tfstate"
+  }
+  }
 
 provider "azurerm" {
   features {}
@@ -74,6 +74,17 @@ resource "azurerm_storage_account" "sa" {
 resource "random_integer" "rand" {
   min = 10000
   max = 99999
+}
+
+resource "azurerm_key_vault" "dev" {
+  name                        = "kv${random_integer.rand.result}"
+  location                    = module.network.location
+  resource_group_name         = module.network.rg_name
+  tenant_id                   = data.azurerm_client_config.current.tenant_id
+  sku_name                    = "standard"
+  soft_delete_retention_days  = 7
+  purge_protection_enabled    = false
+  tags                        = module.network.tags
 }
 
 output "vm_public_ip" {
