@@ -40,7 +40,7 @@ jobs:
 
   docs:
     runs-on: ubuntu-latest
-    needs: terraform   # ensures docs run after terraform job succeeds
+    needs: terraform
     steps:
       - uses: actions/checkout@v4
 
@@ -49,10 +49,19 @@ jobs:
         with:
           working-dir: modules/vnet
           output-file: README.md
-          output-method: replace  # only updates the TF_DOCS section
+          output-method: replace
 
-      - name: Upload README artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: module-docs
-          path: modules/vnet/README.md
+      - name: Commit & Push updated docs
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add modules/vnet/README.md
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update terraform-docs"
+            git push origin main
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
