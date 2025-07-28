@@ -1,0 +1,289 @@
+bogdanmanole@bgdmbp dev % terraform plan -out=tfplan 
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # azurerm_linux_virtual_machine.vm will be created
+  + resource "azurerm_linux_virtual_machine" "vm" {
+      + admin_username                                         = "azureuser"
+      + allow_extension_operations                             = true
+      + bypass_platform_safety_checks_on_user_schedule_enabled = false
+      + computer_name                                          = (known after apply)
+      + disable_password_authentication                        = true
+      + disk_controller_type                                   = (known after apply)
+      + extensions_time_budget                                 = "PT1H30M"
+      + id                                                     = (known after apply)
+      + location                                               = "eastus"
+      + max_bid_price                                          = -1
+      + name                                                   = "vm-dev"
+      + network_interface_ids                                  = (known after apply)
+      + patch_assessment_mode                                  = "ImageDefault"
+      + patch_mode                                             = "ImageDefault"
+      + platform_fault_domain                                  = -1
+      + priority                                               = "Regular"
+      + private_ip_address                                     = (known after apply)
+      + private_ip_addresses                                   = (known after apply)
+      + provision_vm_agent                                     = true
+      + public_ip_address                                      = (known after apply)
+      + public_ip_addresses                                    = (known after apply)
+      + resource_group_name                                    = "rg-dev-eastus"
+      + size                                                   = "Standard_B1s"
+      + tags                                                   = {
+          + "env"    = "dev"
+          + "owner"  = "team‑alpha"
+          + "region" = "eastus"
+        }
+      + virtual_machine_id                                     = (known after apply)
+      + vm_agent_platform_updates_enabled                      = false
+
+      + admin_ssh_key {
+          + public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDDyIPRNv7wgxrzCzto92TymzpVHJiR5YLPZcPL66Rr0CEDi9kVPbGKIqQ7MK7ZjXwKvWuOBHvHlA4buSsf1JB9W45/4DUVsddqFOwd9hOHmyfpUouHmSTcvvF6f+XXMoFCUT2NIZwNwaxddYJCYAFGxbTgbZvIm4TE1B9SXgMY2p6ijQslIsPjyLTB1tsWROCo8U8aVNqMFCn0OxZvgJ9kMDdwg+vE4azlfcKjbHK5XKdbu0xkM8zRrZ733Zg2nEIo4BJU/RvfV+8J/jTh1eUeRRka6+66O8a5ejNSVsZDOcX3+vZHf89iiJaSsYQo97dt34G6ZJ9O3J4//C4wMA8c0xugijU/hvbZy8fc2b07FnLC4Ph5DHGS2jLN7vN0sCCEpUSgSUnL3JorLCWTR5LxjH+zTXpJfw4VVJEEfUdSe/lVCwo3IIDY8Of3z9gWVLsHw00m1lQqC75YP+b/TUdZNbDN4PlQ2kjnMPoS3ZqECLhggWtcYh9gB4VOiQqDnqk="
+          + username   = "azureuser"
+        }
+
+      + os_disk {
+          + caching                   = "ReadWrite"
+          + disk_size_gb              = (known after apply)
+          + name                      = (known after apply)
+          + storage_account_type      = "Standard_LRS"
+          + write_accelerator_enabled = false
+        }
+
+      + source_image_reference {
+          + offer     = "0001-com-ubuntu-server-jammy"
+          + publisher = "Canonical"
+          + sku       = "22_04-lts"
+          + version   = "latest"
+        }
+    }
+
+  # azurerm_network_interface.nic will be created
+  + resource "azurerm_network_interface" "nic" {
+      + accelerated_networking_enabled = (known after apply)
+      + applied_dns_servers            = (known after apply)
+      + dns_servers                    = (known after apply)
+      + enable_accelerated_networking  = (known after apply)
+      + enable_ip_forwarding           = (known after apply)
+      + id                             = (known after apply)
+      + internal_domain_name_suffix    = (known after apply)
+      + ip_forwarding_enabled          = (known after apply)
+      + location                       = "eastus"
+      + mac_address                    = (known after apply)
+      + name                           = "nic-dev"
+      + private_ip_address             = (known after apply)
+      + private_ip_addresses           = (known after apply)
+      + resource_group_name            = "rg-dev-eastus"
+      + tags                           = {
+          + "env"    = "dev"
+          + "owner"  = "team‑alpha"
+          + "region" = "eastus"
+        }
+      + virtual_machine_id             = (known after apply)
+
+      + ip_configuration {
+          + gateway_load_balancer_frontend_ip_configuration_id = (known after apply)
+          + name                                               = "internal"
+          + primary                                            = (known after apply)
+          + private_ip_address                                 = (known after apply)
+          + private_ip_address_allocation                      = "Dynamic"
+          + private_ip_address_version                         = "IPv4"
+          + subnet_id                                          = (known after apply)
+        }
+    }
+
+  # azurerm_storage_account.sa will be created
+  + resource "azurerm_storage_account" "sa" {
+      + access_tier                        = (known after apply)
+      + account_kind                       = "StorageV2"
+      + account_replication_type           = "LRS"
+      + account_tier                       = "Standard"
+      + allow_nested_items_to_be_public    = true
+      + cross_tenant_replication_enabled   = true
+      + default_to_oauth_authentication    = false
+      + dns_endpoint_type                  = "Standard"
+      + enable_https_traffic_only          = (known after apply)
+      + https_traffic_only_enabled         = (known after apply)
+      + id                                 = (known after apply)
+      + infrastructure_encryption_enabled  = false
+      + is_hns_enabled                     = false
+      + large_file_share_enabled           = (known after apply)
+      + local_user_enabled                 = true
+      + location                           = "eastus"
+      + min_tls_version                    = "TLS1_2"
+      + name                               = (known after apply)
+      + nfsv3_enabled                      = false
+      + primary_access_key                 = (sensitive value)
+      + primary_blob_connection_string     = (sensitive value)
+      + primary_blob_endpoint              = (known after apply)
+      + primary_blob_host                  = (known after apply)
+      + primary_blob_internet_endpoint     = (known after apply)
+      + primary_blob_internet_host         = (known after apply)
+      + primary_blob_microsoft_endpoint    = (known after apply)
+      + primary_blob_microsoft_host        = (known after apply)
+      + primary_connection_string          = (sensitive value)
+      + primary_dfs_endpoint               = (known after apply)
+      + primary_dfs_host                   = (known after apply)
+      + primary_dfs_internet_endpoint      = (known after apply)
+      + primary_dfs_internet_host          = (known after apply)
+      + primary_dfs_microsoft_endpoint     = (known after apply)
+      + primary_dfs_microsoft_host         = (known after apply)
+      + primary_file_endpoint              = (known after apply)
+      + primary_file_host                  = (known after apply)
+      + primary_file_internet_endpoint     = (known after apply)
+      + primary_file_internet_host         = (known after apply)
+      + primary_file_microsoft_endpoint    = (known after apply)
+      + primary_file_microsoft_host        = (known after apply)
+      + primary_location                   = (known after apply)
+      + primary_queue_endpoint             = (known after apply)
+      + primary_queue_host                 = (known after apply)
+      + primary_queue_microsoft_endpoint   = (known after apply)
+      + primary_queue_microsoft_host       = (known after apply)
+      + primary_table_endpoint             = (known after apply)
+      + primary_table_host                 = (known after apply)
+      + primary_table_microsoft_endpoint   = (known after apply)
+      + primary_table_microsoft_host       = (known after apply)
+      + primary_web_endpoint               = (known after apply)
+      + primary_web_host                   = (known after apply)
+      + primary_web_internet_endpoint      = (known after apply)
+      + primary_web_internet_host          = (known after apply)
+      + primary_web_microsoft_endpoint     = (known after apply)
+      + primary_web_microsoft_host         = (known after apply)
+      + public_network_access_enabled      = true
+      + queue_encryption_key_type          = "Service"
+      + resource_group_name                = "rg-dev-eastus"
+      + secondary_access_key               = (sensitive value)
+      + secondary_blob_connection_string   = (sensitive value)
+      + secondary_blob_endpoint            = (known after apply)
+      + secondary_blob_host                = (known after apply)
+      + secondary_blob_internet_endpoint   = (known after apply)
+      + secondary_blob_internet_host       = (known after apply)
+      + secondary_blob_microsoft_endpoint  = (known after apply)
+      + secondary_blob_microsoft_host      = (known after apply)
+      + secondary_connection_string        = (sensitive value)
+      + secondary_dfs_endpoint             = (known after apply)
+      + secondary_dfs_host                 = (known after apply)
+      + secondary_dfs_internet_endpoint    = (known after apply)
+      + secondary_dfs_internet_host        = (known after apply)
+      + secondary_dfs_microsoft_endpoint   = (known after apply)
+      + secondary_dfs_microsoft_host       = (known after apply)
+      + secondary_file_endpoint            = (known after apply)
+      + secondary_file_host                = (known after apply)
+      + secondary_file_internet_endpoint   = (known after apply)
+      + secondary_file_internet_host       = (known after apply)
+      + secondary_file_microsoft_endpoint  = (known after apply)
+      + secondary_file_microsoft_host      = (known after apply)
+      + secondary_location                 = (known after apply)
+      + secondary_queue_endpoint           = (known after apply)
+      + secondary_queue_host               = (known after apply)
+      + secondary_queue_microsoft_endpoint = (known after apply)
+      + secondary_queue_microsoft_host     = (known after apply)
+      + secondary_table_endpoint           = (known after apply)
+      + secondary_table_host               = (known after apply)
+      + secondary_table_microsoft_endpoint = (known after apply)
+      + secondary_table_microsoft_host     = (known after apply)
+      + secondary_web_endpoint             = (known after apply)
+      + secondary_web_host                 = (known after apply)
+      + secondary_web_internet_endpoint    = (known after apply)
+      + secondary_web_internet_host        = (known after apply)
+      + secondary_web_microsoft_endpoint   = (known after apply)
+      + secondary_web_microsoft_host       = (known after apply)
+      + sftp_enabled                       = false
+      + shared_access_key_enabled          = true
+      + table_encryption_key_type          = "Service"
+      + tags                               = {
+          + "env"    = "dev"
+          + "owner"  = "team‑alpha"
+          + "region" = "eastus"
+        }
+    }
+
+  # random_integer.rand will be created
+  + resource "random_integer" "rand" {
+      + id     = (known after apply)
+      + max    = 99999
+      + min    = 10000
+      + result = (known after apply)
+    }
+
+  # module.network.azurerm_network_security_group.this[0] will be created
+  + resource "azurerm_network_security_group" "this" {
+      + id                  = (known after apply)
+      + location            = "eastus"
+      + name                = "vnet-dev-nsg"
+      + resource_group_name = "rg-dev-eastus"
+      + security_rule       = (known after apply)
+      + tags                = {
+          + "env"    = "dev"
+          + "owner"  = "team‑alpha"
+          + "region" = "eastus"
+        }
+    }
+
+  # module.network.azurerm_resource_group.this will be created
+  + resource "azurerm_resource_group" "this" {
+      + id       = (known after apply)
+      + location = "eastus"
+      + name     = "rg-dev-eastus"
+      + tags     = {
+          + "env"    = "dev"
+          + "owner"  = "team‑alpha"
+          + "region" = "eastus"
+        }
+    }
+
+  # module.network.azurerm_subnet.default[0] will be created
+  + resource "azurerm_subnet" "default" {
+      + address_prefixes                               = [
+          + "10.10.0.0/24",
+        ]
+      + default_outbound_access_enabled                = true
+      + enforce_private_link_endpoint_network_policies = (known after apply)
+      + enforce_private_link_service_network_policies  = (known after apply)
+      + id                                             = (known after apply)
+      + name                                           = "default"
+      + private_endpoint_network_policies              = (known after apply)
+      + private_endpoint_network_policies_enabled      = (known after apply)
+      + private_link_service_network_policies_enabled  = (known after apply)
+      + resource_group_name                            = "rg-dev-eastus"
+      + virtual_network_name                           = "vnet-dev"
+    }
+
+  # module.network.azurerm_subnet_network_security_group_association.default[0] will be created
+  + resource "azurerm_subnet_network_security_group_association" "default" {
+      + id                        = (known after apply)
+      + network_security_group_id = (known after apply)
+      + subnet_id                 = (known after apply)
+    }
+
+  # module.network.azurerm_virtual_network.this will be created
+  + resource "azurerm_virtual_network" "this" {
+      + address_space       = [
+          + "10.10.0.0/16",
+        ]
+      + dns_servers         = (known after apply)
+      + guid                = (known after apply)
+      + id                  = (known after apply)
+      + location            = "eastus"
+      + name                = "vnet-dev"
+      + resource_group_name = "rg-dev-eastus"
+      + subnet              = (known after apply)
+      + tags                = {
+          + "env"    = "dev"
+          + "owner"  = "team‑alpha"
+          + "region" = "eastus"
+        }
+    }
+
+Plan: 9 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + vm_public_ip = (known after apply)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: tfplan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "tfplan"
