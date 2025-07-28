@@ -24,7 +24,6 @@ module "network" {
   }
 }
 
-# Simple VM
 resource "azurerm_linux_virtual_machine" "vm" {
   name                = "vm-dev"
   os_disk {

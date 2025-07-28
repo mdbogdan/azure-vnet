@@ -26,7 +26,6 @@ resource "azurerm_virtual_network" "this" {
   tags                = var.tags
 }
 
-# Optional subnet
 resource "azurerm_subnet" "default" {
   count                = var.create_default_subnet ? 1 : 0
   name                 = "default"
@@ -35,7 +34,6 @@ resource "azurerm_subnet" "default" {
   address_prefixes     = [cidrsubnet(var.address_space[0], 8, 0)]
 }
 
-# Optional NSG
 resource "azurerm_network_security_group" "this" {
   count               = var.create_nsg ? 1 : 0
   name                = "${var.vnet_name}-nsg"
@@ -44,7 +42,6 @@ resource "azurerm_network_security_group" "this" {
   tags                = var.tags
 }
 
-# Attach NSG to subnet if both exist
 resource "azurerm_subnet_network_security_group_association" "default" {
   count                     = var.create_default_subnet && var.create_nsg ? 1 : 0
   subnet_id                 = azurerm_subnet.default[0].id
