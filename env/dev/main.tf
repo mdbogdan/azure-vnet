@@ -80,7 +80,7 @@ resource "azurerm_key_vault" "dev" {
   name                        = "kv${random_integer.rand.result}"
   location                    = module.network.location
   resource_group_name         = module.network.rg_name
-  tenant_id                   = data.azurerm_client_config.current.tenant_id
+  tenant_id                   = "10744641-269f-4092-a019-71e10aa4c549"
   sku_name                    = "standard"
   soft_delete_retention_days  = 7
   purge_protection_enabled    = false
