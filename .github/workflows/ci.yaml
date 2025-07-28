@@ -61,7 +61,7 @@ jobs:
             | tar -xz --to-stdout terraform-docs > terraform-docs && chmod +x terraform-docs && sudo mv terraform-docs /usr/local/bin/
 
       - name: Generate module docs
-        run: terraform-docs markdown table --output-file modules/vnet/README.md modules/vnet
+        run: terraform-docs markdown table --output-file README.md .
 
       - name: Commit & Push updated docs
         if: github.ref == 'refs/heads/main'
