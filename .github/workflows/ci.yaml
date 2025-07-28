@@ -27,7 +27,8 @@ jobs:
           terraform_version: ${{ env.TF_VERSION }}
 
       - name: Terraform Init
-        run: terraform init -backend-config="resource_group_name=rg-dev-eastus" -backend-config="storage_account_name=<state‑sa>" -backend-config="container_name=tfstate" -backend-config="key=dev.terraform.tfstate"
+        run: terraform init
+        # run: terraform init -backend-config="resource_group_name=rg-dev-eastus" -backend-config="storage_account_name=<state‑sa>" -backend-config="container_name=tfstate" -backend-config="key=dev.terraform.tfstate"
 
       - name: Terraform Format
         run: terraform fmt -check
